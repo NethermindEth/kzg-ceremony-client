@@ -2,6 +2,9 @@ namespace Nethermind.KZGCeremony;
 
 public interface ICoordinator
 {
-    Task<IContributionBatch?> TryContribute();
-    Task<ContributionReceipt> Contribute(IContributionBatch contributionBatch);
+    Task<CeremonyStatus> GetStatus();
+    Task<CeremonyTranscript> GetTranscript();
+    Task<IContributionBatch?> TryContribute(string sessionToken);
+    Task<ContributionReceipt> Contribute(string sessionToken, IContributionBatch contributionBatch);
+    Task Abort(string sessionToken);
 }
