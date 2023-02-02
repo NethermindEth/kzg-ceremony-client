@@ -11,14 +11,14 @@ public class Participant
         _contributionSource = contributionSource;
     }
 
-    public async Task<ContributionReceipt?> Contribute(int pollingInterval)
+    public async Task<ContributionReceipt?> Contribute(int pollingInterval, string _session)
     {
         // Wait our turn to contribute to the ceremony
         Console.WriteLine("Waiting for our turn to contribute...");
         IContributionBatch? contributionBatch;
         while (true)
         {
-            contributionBatch = await _coordinator.TryContribute();
+            contributionBatch = await _coordinator.TryContribute(_session);
             if (contributionBatch is not null)
                 break;
 
@@ -40,6 +40,6 @@ public class Participant
 
         // Send updated batch to coordinator
         Console.WriteLine("Sending contribution to coordinator...");
-        return await _coordinator.Contribute(contributionBatch);
+        return await _coordinator.Contribute(_session, contributionBatch);
     }
 }
