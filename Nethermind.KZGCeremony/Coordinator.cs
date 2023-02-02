@@ -5,7 +5,6 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
-
 namespace Nethermind.KZGCeremony;
 
 public class Coordinator : ICoordinator
@@ -25,11 +24,11 @@ public class Coordinator : ICoordinator
         return status ?? throw new Exception("Failed to deserialize status");
     }
 
-    public async Task<CeremonyTranscript> GetTranscript()
+    public async Task<CeremonyState> GetTranscript()
     {
         HttpResponseMessage response = await _httpClient.GetAsync("/info/current_state");
         HttpContent content = response.EnsureSuccessStatusCode().Content;
-        CeremonyTranscript? transcript = await content.ReadFromJsonAsync<CeremonyTranscript>();
+        CeremonyState? transcript = await content.ReadFromJsonAsync<CeremonyState>();
         return transcript ?? throw new Exception("Failed to deserialize transcript");
     }
 
