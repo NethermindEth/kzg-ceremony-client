@@ -11,5 +11,4 @@
     <ProjectReference Include="..\Nethermind.Crypto\Nethermind.Crypto.csproj" />
   </ItemGroup>
 
-
 </Project>
