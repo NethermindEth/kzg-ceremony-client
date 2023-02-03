@@ -1,7 +1,7 @@
 
 using Nethermind.Core.Extensions;
 using Nethermind.Crypto.Bls;
-
+using Nethermind.KZGCeremony;
 
 namespace Nethermind.KZGClient
 {
@@ -238,7 +238,8 @@ namespace Nethermind.KZGClient
 
         public static void Main()
         {
-            Client c = new Client();
+            Verifier v = new Verifier();
+            v.Verify();
             // c.Test();
         }
 

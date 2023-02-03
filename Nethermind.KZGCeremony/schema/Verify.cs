@@ -2,10 +2,8 @@ namespace Nethermind.KZGCeremony;
 
 public class Verifier
 {
-
-
+    
     // Schema Check is done in unmarshalling the data from API
-
     public async Task<bool> Verify()
     {
 
@@ -35,7 +33,7 @@ public class Verifier
                         string nextRunningProduct = st.witness.runningProducts[j + 1];
                         string key = st.witness.potPubkeys[j + 1];
 
-                        
+                        Console.WriteLine(currRunningProduct);
                         
                     }
                 }
