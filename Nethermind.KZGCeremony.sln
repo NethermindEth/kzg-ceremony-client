@@ -5,6 +5,18 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.KZGCeremony", "Nethermind.KZGCeremony\Nethermind.KZGCeremony.csproj", "{E5C91A9F-6374-4825-B4AF-940EAF9B6CF8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.Core", "Nethermind.Core\Nethermind.Core.csproj", "{BC8F355A-DD13-415E-8B36-76E5F66AA686}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.Crypto", "Nethermind.Crypto\Nethermind.Crypto.csproj", "{5888CB78-5F21-4531-B34C-784485A1E6DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.Logging", "Nethermind.Logging\Nethermind.Logging.csproj", "{50096BF7-3B08-4519-B4A7-8E2A5E1E17DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.Native", "Nethermind.Native\Nethermind.Native.csproj", "{7C4F90B7-8F6B-4DF0-917A-68ABC0733677}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.Secp256k1", "Nethermind.Secp256k1\Nethermind.Secp256k1.csproj", "{7526C51B-1FFD-4553-896E-48D2AB8B6496}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.Serialization.Rlp", "Nethermind.Serialization.Rlp\Nethermind.Serialization.Rlp.csproj", "{F68FDC4A-C507-4928-B88C-4CC97C31700C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +30,29 @@ Global
 		{E5C91A9F-6374-4825-B4AF-940EAF9B6CF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5C91A9F-6374-4825-B4AF-940EAF9B6CF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5C91A9F-6374-4825-B4AF-940EAF9B6CF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC8F355A-DD13-415E-8B36-76E5F66AA686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC8F355A-DD13-415E-8B36-76E5F66AA686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC8F355A-DD13-415E-8B36-76E5F66AA686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC8F355A-DD13-415E-8B36-76E5F66AA686}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5888CB78-5F21-4531-B34C-784485A1E6DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5888CB78-5F21-4531-B34C-784485A1E6DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5888CB78-5F21-4531-B34C-784485A1E6DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5888CB78-5F21-4531-B34C-784485A1E6DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50096BF7-3B08-4519-B4A7-8E2A5E1E17DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50096BF7-3B08-4519-B4A7-8E2A5E1E17DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50096BF7-3B08-4519-B4A7-8E2A5E1E17DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50096BF7-3B08-4519-B4A7-8E2A5E1E17DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C4F90B7-8F6B-4DF0-917A-68ABC0733677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C4F90B7-8F6B-4DF0-917A-68ABC0733677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C4F90B7-8F6B-4DF0-917A-68ABC0733677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C4F90B7-8F6B-4DF0-917A-68ABC0733677}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7526C51B-1FFD-4553-896E-48D2AB8B6496}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7526C51B-1FFD-4553-896E-48D2AB8B6496}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7526C51B-1FFD-4553-896E-48D2AB8B6496}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7526C51B-1FFD-4553-896E-48D2AB8B6496}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F68FDC4A-C507-4928-B88C-4CC97C31700C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F68FDC4A-C507-4928-B88C-4CC97C31700C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F68FDC4A-C507-4928-B88C-4CC97C31700C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F68FDC4A-C507-4928-B88C-4CC97C31700C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
