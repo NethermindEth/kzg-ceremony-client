@@ -58,21 +58,11 @@ namespace Nethermind.KZGCeremony
         public bool Verify(Contribution previousContribution)
         {
             var prevG1Power = previousContribution._PowersOfTau.G1[1];
-
-            var blsInputsLeft = new BlsPairingInput[] { new BlsPairingInput(prevG1Power, PotPubKey) };
-            var left = _blsOperation.BlsPairings(blsInputsLeft);
-
             var postG1Power = _PowersOfTau.G1[1];
-            var blsInputsRight = new BlsPairingInput[] { new BlsPairingInput(postG1Power, G2Generator) };
-            var right = _blsOperation.BlsPairings(blsInputsRight);
 
-            if (!left.Equals(right))
-            {
-                return false;
-            }
-
-            return true;
-
+            var leftInput = new BlsPairingInput(prevG1Power, PotPubKey);
+            var rightInput = new BlsPairingInput(postG1Power, G2Generator);
+            return _blsOperation.BlsPairings(new BlsPairingInput[] { leftInput, rightInput });
         }
 
         public void UpdateWithness(BigInteger x)
