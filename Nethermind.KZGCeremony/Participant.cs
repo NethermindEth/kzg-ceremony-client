@@ -18,7 +18,7 @@ public class Participant
         IContributionBatch? contributionBatch;
         while (true)
         {
-            contributionBatch = await _coordinator.TryContribute();
+            contributionBatch = await _coordinator.TryContribute("a");
             if (contributionBatch is not null)
                 break;
 
@@ -40,6 +40,6 @@ public class Participant
 
         // Send updated batch to coordinator
         Console.WriteLine("Sending contribution to coordinator...");
-        return await _coordinator.Contribute(contributionBatch);
+        return await _coordinator.Contribute("a", contributionBatch);
     }
 }

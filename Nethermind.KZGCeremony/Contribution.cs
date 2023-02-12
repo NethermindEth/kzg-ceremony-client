@@ -1,0 +1,88 @@
+using System.Numerics;
+using Nethermind.Core.Extensions;
+
+namespace Nethermind.KZGCeremony
+{
+    public class PowersOfTau
+    {
+        public G1ElementAffine[] G1;
+        public G2ElementAffine[] G2;
+
+    }
+
+    public class Contribution
+    {
+
+        public int NumG1Powers;
+        public int NumG2Powers;
+        public PowersOfTau _PowersOfTau;
+        public BigInteger PotPubKey;
+        private readonly BlsOperation _blsOperation;
+        public readonly G2ElementAffine G2Generator;
+
+        public Contribution(PowersOfTau _powersOfTau, BigInteger _potPubKey)
+        {
+            _blsOperation = new BlsOperation();
+            _PowersOfTau = _powersOfTau;
+            PotPubKey = _potPubKey;
+            var X_c0 = "0x024aa2b2f08f0a91260805272dc51051c6e47ad4fa403b02b4510b647ae3d1770bac0326a805bbefd48056c8c121bdb8";
+            var X_c1 = "0x13e02b6052719f607dacd3a088274f65596bd0d09920b61ab5da61bbdc7f5049334cf11213945d57e5ac7d055d042b7e";
+            var Y_c0 = "0x0ce5d527727d6e118cc9cdc6da2e351aadfd9baa8cbdd3a76d429a695160d12c923ac9cc3baca289e193548608b82801";
+            var Y_c1 = "0x0606c4a02ea734cc32acd2b02bc28b99cb3e287e85a763af267492ab572e99ab3f370d275cec1da1aaa9075ff05f79be";
+            G2Generator = new G2ElementAffine(new E2(X_c0, X_c1), new E2(Y_c0, Y_c1));
+        }
+
+        public void UpdatePowersOfTau(BigInteger x)
+        {
+            var xi = new BigInteger(1);
+            for (var i = 0; i < NumG1Powers; i++)
+            {
+                var newG1 = _blsOperation.ScalarG1Mul(_PowersOfTau.G1[i], xi);
+
+                _PowersOfTau.G1[i] = newG1;
+
+                if (i < NumG2Powers)
+                {
+                    var newG2 = _blsOperation.ScalarG2Mul(_PowersOfTau.G2[i], xi);
+                    _PowersOfTau.G2[i] = newG2;
+                }
+
+                var xiNew = BigInteger.Multiply(xi, x) % BlsOperation.Modulus;
+            }
+        }
+
+        public bool Verify(Contribution previousContribution)
+        {
+            var prevG1Power = previousContribution._PowersOfTau.G1[1];
+
+            var blsInput = new BlsPairingInput(prevG1Power, G2Generator);
+            var blsInputs = new BlsPairingInput[] { blsInput };
+
+            var left = _blsOperation.BlsPairings(blsInputs);
+            return true;
+
+        }
+
+        //         func (c *Contribution) Verify(previousContribution *Contribution) (bool, error) {
+        // 	prevG1Power := previousContribution.PowersOfTau.G1Affines[1]
+        // 	left, err := bls12381.Pair([]bls12381.G1Affine{prevG1Power}, []bls12381.G2Affine{c.PotPubKey})
+        // 	if err != nil {
+        // 		return false, fmt.Errorf("pairing prevG1Power with PotPubKey: %s", err)
+        // 	}
+
+        // 	postG1Power := c.PowersOfTau.G1Affines[1]
+        // 	right, err := bls12381.Pair([]bls12381.G1Affine{postG1Power}, []bls12381.G2Affine{g2Generator})
+        // 	if err != nil {
+        // 		return false, fmt.Errorf("pairing postG1Power with G2: %s", err)
+        // 	}
+
+        // 	// If the pairing doesn't match, return `false`.
+        // 	if !left.Equal(&right) {
+        // 		return false, nil
+        // 	}
+
+        // 	// All validations are good, return `true`.
+        // 	return true, nil
+        // }
+    }
+}
