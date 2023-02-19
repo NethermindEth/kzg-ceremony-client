@@ -29,6 +29,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.State", "Netherm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.Trie", "Nethermind.Trie\Nethermind.Trie.csproj", "{5AC3C7A6-009C-4E18-B217-8711D1734721}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.KZGCeremonyTest", "Nethermind.KZGCeremonyTest\Nethermind.KZGCeremonyTest.csproj", "{C31B523E-B9F6-44BE-BB07-5DF104393380}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nethermind.KZGCeremonyTest", "Nethermind.KZGCeremonyTest", "{CA2E3EFC-E13E-4D83-B0D5-44F15D266FC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlsOperationTest", "Nethermind.KZGCeremonyTest\BlsOperationTest\BlsOperationTest.csproj", "{CABDC228-E4AD-4BE2-AB86-56DB815E5734}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContributionJsonTest", "Nethermind.KZGCeremonyTest\ContributionJsonTest\ContributionJsonTest.csproj", "{CA60832D-D0CA-40EA-9F78-9E3B366A1A86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupElement", "Nethermind.KZGCeremonyTest\GroupElement\GroupElement.csproj", "{6BAA8AE6-30AB-4871-A6C4-CEF78B86E601}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,5 +100,26 @@ Global
 		{5AC3C7A6-009C-4E18-B217-8711D1734721}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AC3C7A6-009C-4E18-B217-8711D1734721}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AC3C7A6-009C-4E18-B217-8711D1734721}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C31B523E-B9F6-44BE-BB07-5DF104393380}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C31B523E-B9F6-44BE-BB07-5DF104393380}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C31B523E-B9F6-44BE-BB07-5DF104393380}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C31B523E-B9F6-44BE-BB07-5DF104393380}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CABDC228-E4AD-4BE2-AB86-56DB815E5734}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CABDC228-E4AD-4BE2-AB86-56DB815E5734}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CABDC228-E4AD-4BE2-AB86-56DB815E5734}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CABDC228-E4AD-4BE2-AB86-56DB815E5734}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA60832D-D0CA-40EA-9F78-9E3B366A1A86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA60832D-D0CA-40EA-9F78-9E3B366A1A86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA60832D-D0CA-40EA-9F78-9E3B366A1A86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA60832D-D0CA-40EA-9F78-9E3B366A1A86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BAA8AE6-30AB-4871-A6C4-CEF78B86E601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BAA8AE6-30AB-4871-A6C4-CEF78B86E601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BAA8AE6-30AB-4871-A6C4-CEF78B86E601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BAA8AE6-30AB-4871-A6C4-CEF78B86E601}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CABDC228-E4AD-4BE2-AB86-56DB815E5734} = {CA2E3EFC-E13E-4D83-B0D5-44F15D266FC3}
+		{CA60832D-D0CA-40EA-9F78-9E3B366A1A86} = {CA2E3EFC-E13E-4D83-B0D5-44F15D266FC3}
+		{6BAA8AE6-30AB-4871-A6C4-CEF78B86E601} = {CA2E3EFC-E13E-4D83-B0D5-44F15D266FC3}
 	EndGlobalSection
 EndGlobal

@@ -25,15 +25,15 @@ namespace Nethermind.KZGCeremony
 
         protected virtual (BigInteger, BigInteger) FromBytes(byte[] inputBytes)
         {
-            if (inputBytes.Length != 128)
+            if (inputBytes.Length != 48)
             {
                 new Exception("Incorrect bytes length. Not 128");
             }
-            var xBytes = inputBytes.Slice(0, 64);
-            var yBytes = inputBytes.Slice(64);
+            var xBytes = inputBytes.Slice(0, 24);
+            var yBytes = inputBytes.Slice(24);
 
-            Bytes.ChangeEndianness8(xBytes);
-            Bytes.ChangeEndianness8(yBytes);
+            Bytes.ChangeEndianness8(xBytes.PadLeft(32));
+            Bytes.ChangeEndianness8(yBytes.PadLeft(32));
 
 
             var X = new BigInteger(xBytes);
@@ -47,6 +47,13 @@ namespace Nethermind.KZGCeremony
     {
         public BigInteger X;
         public BigInteger Y;
+
+        public G1ElementAffine(string inputHexString)
+        {
+            var inputBytes = Bytes.FromHexString(inputHexString);
+            (X, Y) = FromBytes(inputBytes);
+        }
+
         public G1ElementAffine(byte[] inputBytes)
         {
             (X, Y) = FromBytes(inputBytes);

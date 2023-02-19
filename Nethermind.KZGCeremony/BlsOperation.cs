@@ -104,7 +104,6 @@ namespace Nethermind.KZGCeremony
             return BlsPairings(input.ToArray());
         }
 
-        // TODO: convert bigint output to Gt field element output
         public bool BlsPairings(byte[] input)
         {
             (ReadOnlyMemory<byte> output, bool success) = this._blsPairingPrecompile.Run(input, this._spec);
@@ -112,7 +111,6 @@ namespace Nethermind.KZGCeremony
             {
                 throw new Exception("not successful");
             }
-
 
             return new BigInteger(output.ToArray()).Equals(new BigInteger(1));
         }
