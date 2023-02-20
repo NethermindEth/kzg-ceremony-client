@@ -5,6 +5,18 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.KZGCeremony", "Nethermind.KZGCeremony\Nethermind.KZGCeremony.csproj", "{E5C91A9F-6374-4825-B4AF-940EAF9B6CF8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.Core", "Nethermind.Core\Nethermind.Core.csproj", "{3452C7BD-2778-4B9D-82CF-E02D7A618AB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.Logging", "Nethermind.Logging\Nethermind.Logging.csproj", "{AB291E39-43A5-4536-B79A-D763C0F28F53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.Native", "Nethermind.Native\Nethermind.Native.csproj", "{267AF579-6C0E-4243-A2DE-BA21DA301757}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.Secp256k1", "Nethermind.Secp256k1\Nethermind.Secp256k1.csproj", "{E34622F6-EAA2-49A6-B7C7-FD0D42946613}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.Blst", "Nethermind.Blst\Nethermind.Blst.csproj", "{5F0F840A-425F-4925-AA30-B53464E957C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.KZGCeremonyTest", "Nethermind.KZGCeremonyTest\Nethermind.KZGCeremonyTest.csproj", "{3BE562EF-D9EE-41D9-B79B-DFFB802AE967}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +30,29 @@ Global
 		{E5C91A9F-6374-4825-B4AF-940EAF9B6CF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5C91A9F-6374-4825-B4AF-940EAF9B6CF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5C91A9F-6374-4825-B4AF-940EAF9B6CF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3452C7BD-2778-4B9D-82CF-E02D7A618AB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3452C7BD-2778-4B9D-82CF-E02D7A618AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3452C7BD-2778-4B9D-82CF-E02D7A618AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3452C7BD-2778-4B9D-82CF-E02D7A618AB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB291E39-43A5-4536-B79A-D763C0F28F53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB291E39-43A5-4536-B79A-D763C0F28F53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB291E39-43A5-4536-B79A-D763C0F28F53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB291E39-43A5-4536-B79A-D763C0F28F53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{267AF579-6C0E-4243-A2DE-BA21DA301757}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{267AF579-6C0E-4243-A2DE-BA21DA301757}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{267AF579-6C0E-4243-A2DE-BA21DA301757}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{267AF579-6C0E-4243-A2DE-BA21DA301757}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E34622F6-EAA2-49A6-B7C7-FD0D42946613}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E34622F6-EAA2-49A6-B7C7-FD0D42946613}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E34622F6-EAA2-49A6-B7C7-FD0D42946613}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E34622F6-EAA2-49A6-B7C7-FD0D42946613}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F0F840A-425F-4925-AA30-B53464E957C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F0F840A-425F-4925-AA30-B53464E957C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F0F840A-425F-4925-AA30-B53464E957C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F0F840A-425F-4925-AA30-B53464E957C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BE562EF-D9EE-41D9-B79B-DFFB802AE967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BE562EF-D9EE-41D9-B79B-DFFB802AE967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BE562EF-D9EE-41D9-B79B-DFFB802AE967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BE562EF-D9EE-41D9-B79B-DFFB802AE967}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
