@@ -5,6 +5,7 @@ using System.Runtime.Intrinsics.X86;
 using Nethermind.Blst;
 using Nethermind.Core.Extensions;
 using Nethermind.KZGCeremony;
+using static Nethermind.Blst.BlsLib;
 
 namespace Nethermind.KZGCeremony
 {
@@ -46,6 +47,7 @@ namespace Nethermind.KZGCeremony
             {
                 var g1Power = Bytes.FromHexString(g1PowerStr.Substring(2));
                 var g1Affine = new BlsLib.P1_Affine(g1Power);
+
                 g1Affines.Add(g1Affine);
             }
 
@@ -103,6 +105,9 @@ namespace Nethermind.KZGCeremony
         public bool Verify(Contribution previousContribution)
         {
             var prevG1Power = previousContribution._PowersOfTau.G1Affines[1];
+
+            var potPubBytes = PotPubKey.compress();
+            var potPubHex = Bytes.ToHexString(potPubBytes);
             var left = new BlsLib.PT(prevG1Power, this.PotPubKey);
 
             var postG1Power = this._PowersOfTau.G1Affines[1];
@@ -113,12 +118,13 @@ namespace Nethermind.KZGCeremony
 
         public void UpdatePowersOfTau(BigInteger x)
         {
-            var xi = new BigInteger(1);
+            var xi = BigInteger.One;
             for (var i = 0; i < this.NumG1Powers; i++)
             {
                 var p1 = new BlsLib.P1(this._PowersOfTau.G1Affines[i]);
                 var newP1 = p1.mult(xi);
-                this._PowersOfTau.G1Affines[i] = new BlsLib.P1_Affine(newP1);
+
+                _PowersOfTau.G1Affines[i] = new BlsLib.P1_Affine(newP1);
 
                 if (i < this.NumG2Powers)
                 {
@@ -139,21 +145,3 @@ namespace Nethermind.KZGCeremony
         }
     }
 }
-
-
-//func(c * Contribution) updatePowersOfTau(x * big.Int) {
-//xi:= big.NewInt(1)
-
-
-//    for i := 0; i < c.NumG1Powers; i++ {
-//        c.PowersOfTau.G1Affines[i].ScalarMultiplication(&c.PowersOfTau.G1Affines[i], xi)
-
-
-//        if i < c.NumG2Powers {
-//            c.PowersOfTau.G2Affines[i].ScalarMultiplication(&c.PowersOfTau.G2Affines[i], xi)
-
-//        }
-//        xi.Mul(xi, x).Mod(xi, bls12381Fr.Modulus())
-
-//    }
-//}

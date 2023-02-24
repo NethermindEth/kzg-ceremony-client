@@ -25,8 +25,14 @@
     <ProjectReference Include="..\Nethermind.KZGCeremony\Nethermind.KZGCeremony.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="testContribution.json">
+    <None Remove="Helpers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Helpers\testContribution.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
 </Project>
