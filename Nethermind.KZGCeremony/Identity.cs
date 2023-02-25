@@ -1,6 +1,8 @@
 using System;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text;
+using static Nethermind.Blst.BlsLib;
 
 namespace Nethermind.KZGCeremony
 {
@@ -37,6 +39,16 @@ namespace Nethermind.KZGCeremony
             var githubId = await GetGitHubId(githubHandle);
 
             return String.Format("git|{0}|{1}", githubId, "@" + githubHandle.ToLower());
+        }
+
+        public static byte[] Sign(string identity, byte[] x)
+        {
+            var secretKey = new SecretKey(x);
+            var identityBytes = Encoding.ASCII.GetBytes(identity);
+            var identityP1 = new P1().hash_to(identityBytes);
+            var signature = identityP1.sign_with(secretKey);
+
+            return signature.compress();
         }
 
         // githubHandle without @
