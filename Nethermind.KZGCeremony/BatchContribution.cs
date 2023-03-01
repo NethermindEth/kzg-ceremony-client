@@ -53,8 +53,6 @@ namespace Nethermind.KZGCeremony
                 frs.Add(fr);
             }
 
-
-            // TODO: contribute with Frs
             ContributeWithFrs(frs);
         }
 
@@ -63,7 +61,6 @@ namespace Nethermind.KZGCeremony
             // TODO: use async
             for (var i = 0; i < Contributions.Count; i++)
             {
-
                 Contributions[i].UpdatePowersOfTau(frs[i]);
                 Contributions[i].UpdateWitness(frs[i]);
             }

@@ -15,7 +15,7 @@ public class Participant
     {
         // Wait our turn to contribute to the ceremony
         Console.WriteLine("Waiting for our turn to contribute...");
-        IContributionBatch? contributionBatch;
+        BatchContributionJson? contributionBatch;
         while (true)
         {
             contributionBatch = await _coordinator.TryContribute("test");
@@ -26,20 +26,22 @@ public class Participant
             await Task.Delay(pollingInterval);
         }
 
-        // Verifying the contribution batch
-        if (!contributionBatch.Verify())
-        {
-            Console.WriteLine("Batch verification failed. Exiting...");
-            return null; // TODO Maybe it is better to throw here
-        }
+        return null;
 
-        // Contributing to the ceremony
-        Console.WriteLine("It is our turn to contribute. Contributing...");
-        IContribution contribution = _contributionSource.Next();
-        contributionBatch.Update(contribution);
+        //// Verifying the contribution batch
+        //if (!contributionBatch.Verify())
+        //{
+        //    Console.WriteLine("Batch verification failed. Exiting...");
+        //    return null; // TODO Maybe it is better to throw here
+        //}
 
-        // Send updated batch to coordinator
-        Console.WriteLine("Sending contribution to coordinator...");
-        return await _coordinator.Contribute("test", contributionBatch);
+        //// Contributing to the ceremony
+        //Console.WriteLine("It is our turn to contribute. Contributing...");
+        //IContribution contribution = _contributionSource.Next();
+        //contributionBatch.Update(contribution);
+
+        //// Send updated batch to coordinator
+        //Console.WriteLine("Sending contribution to coordinator...");
+        //return await _coordinator.Contribute("test", contributionBatch);
     }
 }
