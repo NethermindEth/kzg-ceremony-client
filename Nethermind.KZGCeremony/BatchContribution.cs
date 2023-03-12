@@ -58,14 +58,15 @@ namespace Nethermind.KZGCeremony
 
         public void ContributeWithFrs(List<BigInteger> frs)
         {
-            // TODO: use async
             for (var i = 0; i < Contributions.Count; i++)
             {
+
                 Contributions[i].UpdatePowersOfTau(frs[i]);
                 Contributions[i].UpdateWitness(frs[i]);
 
                 // TODO: bls sign
             }
+            return;
         }
 
         public bool Verify(BatchContribution previousBatchContribution)

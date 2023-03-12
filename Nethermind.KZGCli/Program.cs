@@ -15,7 +15,10 @@ var pollingTimeOption = new Option<int>(
             name: "--interval",
             description: "Polling time interval in ms",
             getDefaultValue: () => 10000);
-
+var outputFilePathOption = new Option<string>(
+            name: "--output",
+            description: "Directory of output contribution receipt file",
+            getDefaultValue: () => AppDomain.CurrentDomain.BaseDirectory);
 
 rootCommand.AddGlobalOption(entropyFileOption);
 rootCommand.AddGlobalOption(sequencerUrlOption);
@@ -28,7 +31,7 @@ var githubCommand = new Command("github", "Contribute using Github handle");
 rootCommand.AddCommand(etheruemCommand);
 rootCommand.AddCommand(githubCommand);
 
-etheruemCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval) =>
+etheruemCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval, outputFilePath) =>
 {
 
     var sequencerHttpClient = new HttpClient();
@@ -68,13 +71,12 @@ etheruemCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval) =>
         extRandomness = await File.ReadAllBytesAsync(entropyFile.FullName);
     }
 
-    await CliContributeAsync(extRandomness, participant, sessionToken, pollingInterval);
+    await CliContributeAsync(extRandomness, participant, sessionToken, pollingInterval, outputFilePath);
 },
-    entropyFileOption, sequencerUrlOption, pollingTimeOption);
+    entropyFileOption, sequencerUrlOption, pollingTimeOption, outputFilePathOption);
 
-githubCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval) =>
+githubCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval, outputFilePath) =>
 {
-
     var sequencerHttpClient = new HttpClient();
     sequencerHttpClient.BaseAddress = new Uri(sequencerUrl);
 
@@ -113,19 +115,25 @@ githubCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval) =>
         extRandomness = await File.ReadAllBytesAsync(entropyFile.FullName);
     }
 
-    await CliContributeAsync(extRandomness, participant, sessionToken, pollingInterval);
+    await CliContributeAsync(extRandomness, participant, sessionToken, pollingInterval, outputFilePath);
 },
-    entropyFileOption, sequencerUrlOption, pollingTimeOption);
+    entropyFileOption, sequencerUrlOption, pollingTimeOption, outputFilePathOption);
 
 return await rootCommand.InvokeAsync(args);
 
-async Task CliContributeAsync(byte[] extRandomness, Participant participant, string sessionToken, int pollingInterval)
+async Task CliContributeAsync(byte[] extRandomness, Participant participant, string sessionToken,
+                              int pollingInterval, string outputFilePath)
 {
+    if (string.IsNullOrEmpty(outputFilePath))
+    {
+        outputFilePath = AppDomain.CurrentDomain.BaseDirectory;
+    }
+
     try
     {
-        var contributionReceipt = await participant.Contribute(pollingInterval, sessionToken, extRandomness);
+        var contributionResult = await participant.Contribute(pollingInterval, sessionToken, extRandomness);
 
-        if (contributionReceipt == null)
+        if (contributionResult == null)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Error: contributionReceipt not found");
@@ -134,10 +142,18 @@ async Task CliContributeAsync(byte[] extRandomness, Participant participant, str
             return;
         }
 
-        var json = JsonConvert.SerializeObject(contributionReceipt);
-        string destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "contributionReceipt.json");
-        System.IO.File.WriteAllText(destPath, json);
+        var receiptJson = JsonConvert.SerializeObject(contributionResult.ContributionReceipt);
+        string receiptPath = Path.Combine(outputFilePath, "contributionReceipt.json");
+        System.IO.File.WriteAllText(receiptPath, receiptJson);
 
+        var contributionJson = JsonConvert.SerializeObject(contributionResult.BatchContribution);
+        string contributionPath = Path.Combine(outputFilePath, "contribution.json");
+        System.IO.File.WriteAllText(contributionPath, contributionJson);
+
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine(String.Format("Contribution written to {0}", contributionPath));
+        Console.WriteLine(String.Format("ContributionReceipt written to {0}", receiptPath));
+        Console.ResetColor();
     }
     catch (Exception ex)
     {

@@ -201,7 +201,7 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "/Users/cheechyuanang/Documents/repo/kzg-ceremony-client/Nethermind.KZGCli/Nethermind.KZGCli.csproj",
-        "projectName": "Nethermind.KZGCli",
+        "projectName": "kzg",
         "projectPath": "/Users/cheechyuanang/Documents/repo/kzg-ceremony-client/Nethermind.KZGCli/Nethermind.KZGCli.csproj",
         "packagesPath": "/Users/cheechyuanang/.nuget/packages/",
         "outputPath": "/Users/cheechyuanang/Documents/repo/kzg-ceremony-client/Nethermind.KZGCli/obj/",
@@ -235,10 +235,6 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
-            "McMaster.Extensions.CommandLineUtils": {
-              "target": "Package",
-              "version": "[4.0.2, )"
-            },
             "System.CommandLine": {
               "target": "Package",
               "version": "[2.0.0-beta4.22272.1, )"
