@@ -19,6 +19,7 @@ public class Participant
         while (true)
         {
             contributionBatchJson = await _coordinator.TryContribute(sessionToken);
+
             if (contributionBatchJson is not null)
             {
                 Console.WriteLine("Yes! Our time to contribute!");

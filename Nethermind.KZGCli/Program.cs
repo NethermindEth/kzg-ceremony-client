@@ -10,11 +10,11 @@ var entropyFileOption = new Option<FileInfo?>(
 var sequencerUrlOption = new Option<string>(
             name: "--url",
             description: "Url of KZG ceremony sequencer",
-            getDefaultValue: () => "https://kzg-ceremony-sequencer-dev.fly.dev");
+            getDefaultValue: () => "https://seq.ceremony.ethereum.org");
 var pollingTimeOption = new Option<int>(
             name: "--interval",
             description: "Polling time interval in ms",
-            getDefaultValue: () => 10000);
+            getDefaultValue: () => 30000);
 var outputFilePathOption = new Option<string>(
             name: "--output",
             description: "Directory of output contribution receipt file",
@@ -154,6 +154,14 @@ async Task CliContributeAsync(byte[] extRandomness, Participant participant, str
         Console.WriteLine(String.Format("Contribution written to {0}", contributionPath));
         Console.WriteLine(String.Format("ContributionReceipt written to {0}", receiptPath));
         Console.ResetColor();
+    }
+    catch (RateLimitedException)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("You have been rate limited. Try a longer polling interval");
+        Console.ResetColor();
+        Console.ReadKey();
+        return;
     }
     catch (Exception ex)
     {
