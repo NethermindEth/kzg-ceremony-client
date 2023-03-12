@@ -41,6 +41,8 @@ namespace Nethermind.KZGCeremony
         public PowersOfTauJson PowersOfTau;
         [JsonProperty("potPubkey")]
         public string PotPubkey;
+        [JsonProperty("bls_signature", NullValueHandling = NullValueHandling.Ignore)]
+        public string BlsSignature;
     }
 }
 

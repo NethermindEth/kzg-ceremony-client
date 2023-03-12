@@ -45,9 +45,14 @@ namespace Nethermind.KZGCeremony
         {
             var secretKey = new SecretKey(x);
             var identityBytes = Encoding.ASCII.GetBytes(identity);
-            var identityP2 = new P2().hash_to(identityBytes);
-            var signature = identityP2.sign_with(secretKey);
 
+            //var identityP2 = new P2().hash_to(identityBytes);
+            //var signature = identityP2.sign_with(secretKey);
+
+            var identityP1 = new P1().hash_to(identityBytes);
+            var signature = identityP1.sign_with(secretKey);
+            
+            // return signature in P1
             return signature.compress();
         }
 

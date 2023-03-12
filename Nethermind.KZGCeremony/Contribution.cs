@@ -27,6 +27,7 @@ namespace Nethermind.KZGCeremony
         public int NumG2Powers;
         public PowersOfTau _PowersOfTau;
         public BlsLib.P2_Affine PotPubKey;
+        public BlsLib.P1_Affine? BlsSignature;
 
 
         public Contribution(int numG1Powers, int numG2Powers, PowersOfTau powersOfTau, BlsLib.P2_Affine potPubKey)

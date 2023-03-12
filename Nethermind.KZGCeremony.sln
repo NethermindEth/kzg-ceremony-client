@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.Blst", "Nethermi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.KZGCeremonyTest", "Nethermind.KZGCeremonyTest\Nethermind.KZGCeremonyTest.csproj", "{3BE562EF-D9EE-41D9-B79B-DFFB802AE967}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nethermind.KZGCli", "Nethermind.KZGCli\Nethermind.KZGCli.csproj", "{785DB176-A969-42A0-A223-8BD380637E67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +56,9 @@ Global
 		{3BE562EF-D9EE-41D9-B79B-DFFB802AE967}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BE562EF-D9EE-41D9-B79B-DFFB802AE967}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BE562EF-D9EE-41D9-B79B-DFFB802AE967}.Release|Any CPU.Build.0 = Release|Any CPU
+		{785DB176-A969-42A0-A223-8BD380637E67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{785DB176-A969-42A0-A223-8BD380637E67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{785DB176-A969-42A0-A223-8BD380637E67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{785DB176-A969-42A0-A223-8BD380637E67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

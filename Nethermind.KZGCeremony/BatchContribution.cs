@@ -63,6 +63,8 @@ namespace Nethermind.KZGCeremony
             {
                 Contributions[i].UpdatePowersOfTau(frs[i]);
                 Contributions[i].UpdateWitness(frs[i]);
+
+                // TODO: bls sign
             }
         }
 

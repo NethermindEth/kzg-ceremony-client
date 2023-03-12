@@ -4,8 +4,10 @@
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.Json;
+using Nethermind.KZGCeremony.Classes;
 using Newtonsoft.Json;
 
 namespace Nethermind.KZGCeremony;
@@ -18,6 +20,19 @@ public class Coordinator : ICoordinator
     {
         _httpClient = httpClient;
     }
+
+    public async Task<AuthRequestLink> GetAuthRequestLink()
+    {
+        var response = await _httpClient.GetAsync("/auth/request_link");
+        var content = response.EnsureSuccessStatusCode().Content;
+
+        var jsonStr = await content.ReadAsStringAsync();
+        var requestLink = JsonConvert.DeserializeObject<AuthRequestLink>(jsonStr);
+        return requestLink ?? throw new Exception("Failed to deserialize requestLink");
+    }
+
+    //public async Task GetGithubCallback() { }
+
 
     public async Task<CeremonyStatus> GetStatus()
     {
@@ -58,8 +73,6 @@ public class Coordinator : ICoordinator
 
         string payload = await response.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
         // The coordinator api returns an object containing an error field if it's still not our turn
-        //return JsonDocument.Parse(payload).RootElement.TryGetProperty("error", out _)
-        //    ? null : JsonSerializer.Deserialize<IContributionBatch>(payload);
         return JsonDocument.Parse(payload).RootElement.TryGetProperty("error", out _)
             ? null : JsonConvert.DeserializeObject<BatchContributionJson>(payload);
     }
@@ -86,26 +99,6 @@ public class Coordinator : ICoordinator
         ContributionReceipt? receipt = await content.ReadFromJsonAsync<ContributionReceipt>();
         return receipt ?? throw new Exception("Failed to deserialize receipt");
     }
-
-    //public async Task<ContributionReceipt> Contribute(string sessionToken, IContributionBatch contributionBatch)
-    //{
-    //    HttpRequestMessage message = new(HttpMethod.Post, "/contribute");
-    //    message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", sessionToken);
-    //    message.Content = JsonContent.Create(contributionBatch);
-
-    //    HttpResponseMessage response = await _httpClient.SendAsync(message);
-
-    //    if (response.StatusCode == HttpStatusCode.BadRequest)
-    //    {
-    //        // There was an error with our contribution
-    //        // TODO Decode error from response content
-    //        throw new ContributionAbortException();
-    //    }
-
-    //    HttpContent content = response.EnsureSuccessStatusCode().Content;
-    //    ContributionReceipt? receipt = await content.ReadFromJsonAsync<ContributionReceipt>();
-    //    return receipt ?? throw new Exception("Failed to deserialize receipt");
-    //}
 
     public async Task Abort(string sessionToken)
     {

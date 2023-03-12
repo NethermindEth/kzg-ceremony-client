@@ -2,9 +2,6 @@ using Nethermind.Blst;
 using Nethermind.Core.Extensions;
 using Nethermind.KZGCeremony;
 
-Console.WriteLine("Hello, World!");
-
-
 var sequencerHttpClient = new HttpClient();
 sequencerHttpClient.BaseAddress = new Uri("http://127.0.0.1:3000/");
 
