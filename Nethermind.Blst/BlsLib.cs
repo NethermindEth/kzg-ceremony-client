@@ -49,16 +49,6 @@ namespace Nethermind.Blst
 
     public static class BlsLib
     {
-        //static BlsLib() => AssemblyLoadContext.Default.ResolvingUnmanagedDll += (assembly, path) => NativeLibrary.Load($"runtimes/{(
-        //    RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "linux" :
-        //    RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? "osx" :
-        //    RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "win" : "")}-{RuntimeInformation.ProcessArchitecture switch
-        //    {
-        //        Architecture.X64 => "x64",
-        //        Architecture.Arm64 => "arm64",
-        //        _ => ""
-        //    }}/native/{path}.{(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "dll" : "so")}");
-
         static BlsLib() => AssemblyLoadContext.Default.ResolvingUnmanagedDll += (assembly, path) => NativeLibrary.Load($"runtimes/{(
             RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "linux" :
             RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? "osx" :
@@ -67,7 +57,9 @@ namespace Nethermind.Blst
                 Architecture.X64 => "x64",
                 Architecture.Arm64 => "arm64",
                 _ => ""
-            }}/native/{path}.{(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "dll" : "dylib")}");
+            }}/native/{path}.{(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "dll" :
+            RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "so" :
+            "dylib")}");
 
 
         private const int P1_COMPRESSED_SZ = 384 / 8;
