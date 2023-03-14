@@ -9,6 +9,13 @@
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <AssemblyName>kzg</AssemblyName>
+    <PublishAot>true</PublishAot>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <AssemblyName>kzg</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StripSymbols>true</StripSymbols>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="McMaster.Extensions.CommandLineUtils" />
