@@ -47,7 +47,9 @@ jobs:
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
-        asset_name: kzg-${{ matrix.target.arch }}
-        tag: ${{ inputs.tag }}
+        file_glob: true
+        file: out/*
+        asset_name: kzg-${{ matrix.target.arch }}-${{ inputs.tag }}
+        tag: v${{ inputs.tag }}
         overwrite: true
         body: "Release {{ inputs.tag }} of the kzg tool"
