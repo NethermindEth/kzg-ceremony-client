@@ -33,7 +33,7 @@ jobs:
           - arch: osx-x64
             host: macos-latest
           - arch: win-x64
-            host: windows-latest
+            host: linux-x64
     steps:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
