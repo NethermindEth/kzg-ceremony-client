@@ -16,7 +16,13 @@ We utlize C bindings for [blst](https://github.com/supranational/blst) library t
 Ensure you have downloaded the [.Net 7.0 Sdk](https://dotnet.microsoft.com/en-us/download/dotnet/7.0). 
 Git clone this repo and at the root directory, run:
 ```
-dotnet build --configuration Release
+dotnet build -c Release
 ```
 
 The executable file is located at `Nethermind.KZGCli/bin/Release/net7.0/kzg`
+
+You will then invoke command as such: 
+
+```
+./kzg github
+```

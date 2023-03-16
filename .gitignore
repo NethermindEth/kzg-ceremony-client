@@ -478,3 +478,5 @@ $RECYCLE.BIN/
 
 obj
 */.DS_Store
+
+out
