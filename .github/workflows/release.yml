@@ -44,8 +44,8 @@ jobs:
         submodules: recursive
     - name: Publish for ${{ matrix.target.arch }}
       run: dotnet publish Nethermind.KZGCli/Nethermind.KZGCli.csproj --self-contained -c Release -p:Version=${{ inputs.tag }} -o out --runtime ${{ matrix.target.arch }} /p:DebugType=None /p:DebugSymbols=false
-    - name: Upload Release
-      uses: ncipollo/release-action@v1.12.0
+    - name: Zip Release
+      uses: TheDoctor0/zip-release@0.7.1
       with:
         path: out/
         artifacts: Kzg-${{ matrix.target.arch }}.zip
