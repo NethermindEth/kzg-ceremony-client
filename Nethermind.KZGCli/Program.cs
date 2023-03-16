@@ -55,8 +55,6 @@ etheruemCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval, ou
         return;
     }
 
-    // TODO: callback to get ethaddress
-
     byte[] extRandomness;
     if (entropyFile == null)
     {
@@ -99,8 +97,6 @@ githubCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval, outp
         return;
     }
 
-    // TODO: callback to get github handle
-
     byte[] extRandomness;
     if (entropyFile == null)
     {
@@ -112,7 +108,15 @@ githubCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval, outp
     }
     else
     {
-        extRandomness = await File.ReadAllBytesAsync(entropyFile.FullName);
+        var fileBytes = await File.ReadAllBytesAsync(entropyFile.FullName);
+        var byteLength = fileBytes.Length;
+        var mult16 = byteLength / 16;
+        var supposedLength = (mult16 + 1) * 16;
+        var newArray = new byte[supposedLength];
+
+        var startAt = newArray.Length - byteLength;
+        Array.Copy(fileBytes, 0, newArray, startAt, byteLength);
+        extRandomness = newArray;
     }
 
     await CliContributeAsync(extRandomness, participant, sessionToken, pollingInterval, outputFilePath);
