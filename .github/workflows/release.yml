@@ -43,9 +43,7 @@ jobs:
       with:
         submodules: recursive
     - name: Publish for ${{ matrix.target.arch }}
-      run: |
-        dotnet publish Nethermind.KZGCli/Nethermind.KZGCli.csproj --self-contained -c Release -p:Version=${{ inputs.tag }} -o out --runtime ${{ matrix.target.arch }} /p:DebugType=None /p:DebugSymbols=false
-        mv out/* 
+      run: dotnet publish Nethermind.KZGCli/Nethermind.KZGCli.csproj --self-contained -c Release -p:Version=${{ inputs.tag }} -o out --runtime ${{ matrix.target.arch }} /p:DebugType=None /p:DebugSymbols=false
     - name: Upload Release
       uses: ncipollo/release-action@v1.12.0
       with:
