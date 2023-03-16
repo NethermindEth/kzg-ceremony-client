@@ -43,12 +43,11 @@ jobs:
       with:
         submodules: recursive
     - name: Publish for ${{ matrix.target.arch }}
-      run: dotnet publish Nethermind.KZGCli/Nethermind.KZGCli.csproj --self-contained -c Release -p:Version=${{ inputs.tag }} -o out -p:AssemblyName=kzg-${{ matrix.target.arch }} --runtime ${{ matrix.target.arch }} /p:DebugType=None /p:DebugSymbols=false
-    - name: Upload binaries to release
-      uses: svenstaro/upload-release-action@v2
+      run: |
+        dotnet publish Nethermind.KZGCli/Nethermind.KZGCli.csproj --self-contained -c Release -p:Version=${{ inputs.tag }} -o out --runtime ${{ matrix.target.arch }} /p:DebugType=None /p:DebugSymbols=false
+        mv out/* 
+    - name: Upload Release
+      uses: ncipollo/release-action@v1.12.0
       with:
-        file_glob: true
-        file: out/*
-        tag: v${{ inputs.tag }}
-        overwrite: true
-        body: "Release ${{ inputs.tag }} of the kzg tool"
+        path: out/
+        artifacts: Kzg-${{ matrix.target.arch }}.zip
