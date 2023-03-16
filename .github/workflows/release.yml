@@ -1,0 +1,51 @@
+name: Release
+
+on: 
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Version tag
+        required: true
+
+permissions:
+  deployments: write
+  packages: write
+  contents: write
+
+env:
+  PACKAGE_DIR: pkg
+  PACKAGE_RETENTION: 2
+  PUB_DIR: pub
+  SCRIPTS_PATH: ${{ github.workspace }}/nethermind/scripts/deployment
+
+jobs:
+  release:
+    runs-on: ${{ matrix.target.host }}
+    strategy:
+      matrix:
+        target:
+          - arch: linux-x64
+            host: ubuntu-22.04
+          - arch: linux-arm64
+            host: ubuntu-22.04
+          - arch: osx-arm64
+            host: macos-latest
+          - arch: osx-x64
+            host: macos-latest
+          - arch: win-x64
+            host: windows-latest
+    steps:
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Publish for ${{ matrix.target.arch }}
+      run: dotnet publish Nethermind.KZGCli/Nethermind.KZGCli.csproj -o out/${{ matrix.target.arch }} --self-contained --runtime ${{ matrix.target.arch }} /p:DebugType=None /p:DebugSymbols=false
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: Publish for ${{ matrix.target.arch }}
+        path: out
