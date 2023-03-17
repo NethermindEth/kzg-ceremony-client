@@ -1,11 +1,8 @@
-using System;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Runtime.Loader;
 using System.Text;
 using Nethermind.Core.Extensions;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using static Nethermind.Logging.TestErrorLogManager;
 
 using size_t = System.UIntPtr;
 namespace Nethermind.Blst
@@ -49,18 +46,18 @@ namespace Nethermind.Blst
 
     public static class BlsLib
     {
-        static BlsLib() => AssemblyLoadContext.Default.ResolvingUnmanagedDll += (assembly, path) => NativeLibrary.Load($"runtimes/{(
-            RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "linux" :
-            RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? "osx" :
-            RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "win" : "")}-{RuntimeInformation.ProcessArchitecture switch
-            {
-                Architecture.X64 => "x64",
-                Architecture.Arm64 => "arm64",
-                _ => ""
-            }}/native/{path}.{(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "dll" :
-            RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "so" :
-            "dylib")}");
-
+        static BlsLib() => AssemblyLoadContext.Default.ResolvingUnmanagedDll += (assembly, path) => 
+            NativeLibrary.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"runtimes/{(
+                RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "linux" :
+                RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? "osx" :
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "win" : "")}-{RuntimeInformation.ProcessArchitecture switch
+                {
+                    Architecture.X64 => "x64",
+                    Architecture.Arm64 => "arm64",
+                    _ => ""
+                }}/native/{path}.{(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "dll" :
+                RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "so" :
+                "dylib")}"));
 
         private const int P1_COMPRESSED_SZ = 384 / 8;
         private const int P2_COMPRESSED_SZ = 2 * P1_COMPRESSED_SZ;
