@@ -16,6 +16,9 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <AssemblyName>kzg</AssemblyName>
   </PropertyGroup>
+  <PropertyGroup>
+    <StripSymbols>true</StripSymbols>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="McMaster.Extensions.CommandLineUtils" />
     <None Remove="System.CommandLine" />
