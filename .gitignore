@@ -480,3 +480,4 @@ obj
 */.DS_Store
 
 out
+.idea/

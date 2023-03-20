@@ -45,7 +45,7 @@ etheruemCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval, ou
     Console.WriteLine("Visit this link and enter your session Id below.");
     Console.WriteLine(requestLink.EthAuthUrl);
     Console.WriteLine("\n Enter Session id: \n");
-    var sessionToken = Console.ReadLine();
+    var sessionToken = Console.ReadLine().Trim(' ', '\t', '\r', '\n');
     if (string.IsNullOrEmpty(sessionToken))
     {
         Console.ForegroundColor = ConsoleColor.Red;
@@ -87,7 +87,7 @@ githubCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval, outp
     Console.WriteLine(requestLink.GithubAuthUrl);
 
     Console.WriteLine("\n Enter Session id: \n");
-    var sessionToken = Console.ReadLine();
+    var sessionToken = Console.ReadLine().Trim(' ', '\t', '\r', '\n');
     if (string.IsNullOrEmpty(sessionToken))
     {
         Console.ForegroundColor = ConsoleColor.Red;

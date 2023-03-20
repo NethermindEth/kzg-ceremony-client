@@ -13,6 +13,9 @@
     <None Update="runtimes\linux-arm\native\blst.so">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="runtimes\linux-arm64\native\blst.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="runtimes\linux-x64\native\blst.so">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -25,9 +28,5 @@
     <None Update="runtimes\win-x64\native\blst.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="runtimes\linux-arm64\native\" />
-    <Folder Include="runtimes\linux-x64\native\" />
   </ItemGroup>
 </Project>
