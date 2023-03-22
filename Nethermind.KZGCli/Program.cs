@@ -1,4 +1,5 @@
 using System.CommandLine;
+using System.Security.Cryptography;
 using Nethermind.KZGCeremony;
 using Newtonsoft.Json;
 using static System.Net.Mime.MediaTypeNames;
@@ -59,9 +60,9 @@ etheruemCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval, ou
     if (entropyFile == null)
     {
 
-        var rnd = new Random();
+        var rnd = RandomNumberGenerator.Create();
         var randomBytes = new byte[48];
-        rnd.NextBytes(randomBytes);
+        rnd.GetBytes(randomBytes);
         extRandomness = randomBytes;
     }
     else
@@ -101,9 +102,9 @@ githubCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval, outp
     if (entropyFile == null)
     {
 
-        var rnd = new Random();
+        var rnd = RandomNumberGenerator.Create();
         var randomBytes = new byte[48];
-        rnd.NextBytes(randomBytes);
+        rnd.GetBytes(randomBytes);
         extRandomness = randomBytes;
     }
     else
