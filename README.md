@@ -48,7 +48,9 @@ eg.
 ```
 
 ### Passing in randomness
-By default, the randomness is generated in the cli. To pass in custom randomness, you may use the following command:
+By default, the randomness is generated in the cli. Randomness is generated using the RNG in [System.Security.Cryptography](https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.randomnumbergenerator?view=net-7.0)
+
+To pass in custom randomness, you may use the following command:
 
 ``` shell
 ./kzg github --file my_randomness.txt
