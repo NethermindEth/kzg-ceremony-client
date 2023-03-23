@@ -5,6 +5,7 @@ using System.Text;
 using System.Numerics;
 using Nethermind.Core.Extensions;
 using Nethermind.Blst;
+using System.Security.Cryptography;
 
 namespace Nethermind.KZGCeremony
 {
@@ -37,7 +38,8 @@ namespace Nethermind.KZGCeremony
         public void Contribute(byte[] extRandomness)
         {
             var frs = new List<BigInteger>();
-            var rnd = new Random();
+
+            var rnd = RandomNumberGenerator.Create();
             Bytes.ChangeEndianness8(extRandomness);
             var randomExt = new BigInteger(extRandomness);
 
@@ -45,7 +47,7 @@ namespace Nethermind.KZGCeremony
             {
                 // 381 bits to 48 bytes
                 var randomBytes = new byte[48];
-                rnd.NextBytes(randomBytes);
+                rnd.GetBytes(randomBytes);
 
                 var randomLocal = new BigInteger(randomBytes, true, true);
                 var fr = BigInteger.Multiply(randomExt, randomLocal) % BlsLib.FrModulus();
