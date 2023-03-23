@@ -18,4 +18,10 @@
     <ProjectReference Include="..\Nethermind.Logging\Nethermind.Logging.csproj" />
     <ProjectReference Include="..\Nethermind.Secp256k1\Nethermind.Secp256k1.csproj" />
   </ItemGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <StripSymbols>true</StripSymbols>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
 </Project>

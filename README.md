@@ -114,14 +114,17 @@ Congratulation!!
 ## Build from this repo
 Ensure you have downloaded the [.Net 7.0 Sdk](https://dotnet.microsoft.com/en-us/download/dotnet/7.0). 
 Git clone this repo and at the root directory, run:
-```
-dotnet build -c Release
+
+```sh
+dotnet publish Nethermind.KZGCli/Nethermind.KZGCli.csproj -c Release -o .
+# or just
+make
 ```
 
-The executable file is located at `Nethermind.KZGCli/bin/Release/net7.0/kzg`
+An executable file named `kzg` will appear.
 
 You will then invoke command as such: 
 
-```
+```sh
 ./kzg github
 ```
