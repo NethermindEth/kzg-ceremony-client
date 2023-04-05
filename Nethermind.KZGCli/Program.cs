@@ -47,6 +47,7 @@ rootCommand.SetHandler(async ctx =>
     var selectedCommand = rootCommand.Subcommands.First(sc => sc.Name == commandName);
     AddOptions(selectedCommand);
     await selectedCommand.InvokeAsync(args, ctx.Console);
+    Console.ReadLine();
 });
 
 etheruemCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval, outputFilePath) =>
