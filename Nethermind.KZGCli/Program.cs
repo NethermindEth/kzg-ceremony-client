@@ -2,7 +2,7 @@ using System.CommandLine;
 using System.Security.Cryptography;
 using Nethermind.KZGCeremony;
 using Newtonsoft.Json;
-using static System.Net.Mime.MediaTypeNames;
+using Spectre.Console;
 
 var rootCommand = new RootCommand("Contribute to Ethereum's KZG Ceremony");
 var entropyFileOption = new Option<FileInfo?>(
@@ -21,16 +21,33 @@ var outputFilePathOption = new Option<string>(
             description: "Directory of output contribution receipt file",
             getDefaultValue: () => AppDomain.CurrentDomain.BaseDirectory);
 
-rootCommand.AddGlobalOption(entropyFileOption);
-rootCommand.AddGlobalOption(sequencerUrlOption);
-rootCommand.AddGlobalOption(pollingTimeOption);
+void AddOptions(Command command)
+{
+    command.AddGlobalOption(entropyFileOption);
+    command.AddGlobalOption(sequencerUrlOption);
+    command.AddGlobalOption(pollingTimeOption);
+    command.AddGlobalOption(outputFilePathOption);
+}
 
+AddOptions(rootCommand);
 
 var etheruemCommand = new Command("ethereum", "Contribute using Ethereum address");
 var githubCommand = new Command("github", "Contribute using Github handle");
 
 rootCommand.AddCommand(etheruemCommand);
 rootCommand.AddCommand(githubCommand);
+
+rootCommand.SetHandler(async ctx =>
+{
+    var commandName = AnsiConsole.Prompt(
+        new SelectionPrompt<string>()
+            .Title("Please, select a contribution way or run the command with --help argument to get more details")
+            .AddChoices(rootCommand.Subcommands.Select(c => c.Name)));
+
+    var selectedCommand = rootCommand.Subcommands.First(sc => sc.Name == commandName);
+    AddOptions(selectedCommand);
+    await selectedCommand.InvokeAsync(args, ctx.Console);
+});
 
 etheruemCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval, outputFilePath) =>
 {
@@ -46,7 +63,7 @@ etheruemCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval, ou
     Console.WriteLine("Visit this link and enter your session Id below.");
     Console.WriteLine(requestLink.EthAuthUrl);
     Console.WriteLine("\n Enter Session id: \n");
-    var sessionToken = Console.ReadLine().Trim(' ', '\t', '\r', '\n');
+    var sessionToken = Console.ReadLine()!.Trim(' ', '\t', '\r', '\n');
     if (string.IsNullOrEmpty(sessionToken))
     {
         Console.ForegroundColor = ConsoleColor.Red;
@@ -88,7 +105,7 @@ githubCommand.SetHandler(async (entropyFile, sequencerUrl, pollingInterval, outp
     Console.WriteLine(requestLink.GithubAuthUrl);
 
     Console.WriteLine("\n Enter Session id: \n");
-    var sessionToken = Console.ReadLine().Trim(' ', '\t', '\r', '\n');
+    var sessionToken = Console.ReadLine()!.Trim(' ', '\t', '\r', '\n');
     if (string.IsNullOrEmpty(sessionToken))
     {
         Console.ForegroundColor = ConsoleColor.Red;
@@ -176,6 +193,4 @@ async Task CliContributeAsync(byte[] extRandomness, Participant participant, str
         Console.ReadKey();
         return;
     }
-
-    return;
 }
